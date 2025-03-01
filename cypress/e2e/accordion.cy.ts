@@ -1,5 +1,8 @@
 describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:5173')
+  it('visits', () => {
+    cy.visit(Cypress.env('url'))
+  })
+  it('expands', () => {
+    cy.visit(Cypress.env('url'))
   })
 })
