@@ -2,6 +2,11 @@
 
 This repository contains the source code for a simple web app containing an accordion for questions and answers.
 
+Tech stack:
+React Vite
+Apollo Client
+Cypress
+
 ## How to run
 
 Install dependencies
