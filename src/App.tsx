@@ -15,7 +15,7 @@ function App() {
             {accordion.map(((gqlAccordion: GqlAccordion) => (
                 <>
                     <Typography key={gqlAccordion._id} component="h1" data-cy={`accordion-${gqlAccordion._id}`}>{gqlAccordion.title}</Typography>
-                    {gqlAccordion.accordionItemsCollection.items.map((gqlAccordionItem, index) => (
+                    {gqlAccordion.accordionItemsCollection.items.map((gqlAccordionItem) => (
                         <FaqAccordion key={gqlAccordionItem._id} gqlAccordionItem={gqlAccordionItem}/>))}
                 </>
             )))}
