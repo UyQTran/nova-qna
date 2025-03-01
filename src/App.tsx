@@ -1,4 +1,3 @@
-import './App.css'
 import {client} from "./client/gqlClient.ts";
 import {gqlFaqAccordion} from "./client/queries.ts";
 import {Typography} from '@mui/material';
@@ -10,17 +9,14 @@ function App() {
     const [accordion, setAccordion] = useState([]);
     client.query({query: gqlFaqAccordion}).then((result) => setAccordion(result.data.accordionCollection.items))
 
-    return (
+    return accordion.map(((gqlAccordion: GqlAccordion) => (
         <>
-            {accordion.map(((gqlAccordion: GqlAccordion) => (
-                <>
-                    <Typography key={gqlAccordion._id} component="h1" data-cy={`accordion-${gqlAccordion._id}`}>{gqlAccordion.title}</Typography>
-                    {gqlAccordion.accordionItemsCollection.items.map((gqlAccordionItem) => (
-                        <FaqAccordion key={gqlAccordionItem._id} gqlAccordionItem={gqlAccordionItem}/>))}
-                </>
-            )))}
+            <Typography key={gqlAccordion._id} variant="h1" data-cy={`accordion-${gqlAccordion._id}`}>{gqlAccordion.title}</Typography>
+            {gqlAccordion.accordionItemsCollection.items.map((gqlAccordionItem) => (
+                <FaqAccordion key={gqlAccordionItem._id} gqlAccordionItem={gqlAccordionItem}/>))}
         </>
-    )
+    )))
+
 }
 
 export default App
