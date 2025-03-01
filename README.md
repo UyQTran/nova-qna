@@ -38,3 +38,7 @@ Environment variables and secrets are stored in this repository's settings.
 Which contains the URL to Contentful backend and the access token. 
 If you want to test the app towards the actual backend, simply change the variables in .env with the variables
 and secrets found in the GitHub Repository
+
+## GitHub Actions
+
+The GitHub Actions pipeline is pseudo coded and does not work yet
