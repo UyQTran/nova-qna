@@ -14,7 +14,7 @@ const FaqAccordion = ({gqlAccordionItem}: FaqAccordionProps)=>
             aria-controls="panel1-content"
             id="panel1-header"
         >
-            <Typography component="span">{gqlAccordionItem.name}</Typography>
+            <Typography data-cy={`accordion-item-title-${gqlAccordionItem._id}`} component="span">{gqlAccordionItem.name}</Typography>
         </AccordionSummary>
         <AccordionDetails data-cy={`accordion-item-details-${gqlAccordionItem._id}`}>
             {gqlAccordionItem.text}

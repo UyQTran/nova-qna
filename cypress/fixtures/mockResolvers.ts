@@ -1,4 +1,4 @@
-const accordionItems = [
+export const accordionItems = [
     {
         _id: '123',
         name: 'Hvilke selskaper har Uy jobbet for?',
@@ -11,7 +11,7 @@ const accordionItems = [
     }
 ];
 
-const accordions = [
+export const accordions = [
     {
         _id: '123',
         title: 'Uy sine FAQs',
