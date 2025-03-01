@@ -9,6 +9,7 @@ interface FaqAccordionProps {
 const FaqAccordion = ({gqlAccordionItem}: FaqAccordionProps)=>
     <Accordion>
         <AccordionSummary
+            data-cy={`accordion-item-${gqlAccordionItem._id}`}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"

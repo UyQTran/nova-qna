@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start:mock": "npx tsx mock-server.ts",
+    "start:mock": "npx tsx cypress/mock-server.ts",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
