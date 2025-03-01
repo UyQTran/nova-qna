@@ -41,4 +41,4 @@ and secrets found in the GitHub Repository
 
 ## GitHub Actions
 
-The GitHub Actions pipeline is pseudo coded and does not work yet
+The GitHub Actions is configured with build and Cypress run
