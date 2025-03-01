@@ -1,5 +1,6 @@
 import {ApolloServer} from "@apollo/server";
 import {startStandaloneServer} from "@apollo/server/standalone";
+import {mockResolvers} from "./fixtures/mockResolvers";
 
 const typeDefs = `#graphql
   type AccordionItem {
@@ -24,36 +25,10 @@ const typeDefs = `#graphql
   }
 `;
 
-const accordionItems = [
-    {
-        _id: '123',
-        name: 'Hvilke selskaper har Uy jobbet for?',
-        text: 'EVRY, Dfind Consulting, Apriil og Webstep'
-    },
-    {
-        _id: '234',
-        name: 'Hvor gammel er Uy?',
-        text: 'Han er 32 år gammel'
-    }
-];
-
-const accordions = [
-    {
-        _id: '123',
-        title: 'Uy sine FAQs',
-        accordionItemsCollection: {items: accordionItems}
-    }
-];
-
-const resolvers = {
-    Query: {
-        accordionCollection: () => ({items: accordions}),
-    },
-};
 
 const server = new ApolloServer({
     typeDefs,
-    resolvers,
+    resolvers: mockResolvers,
 });
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

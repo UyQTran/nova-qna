@@ -9,14 +9,14 @@ interface FaqAccordionProps {
 const FaqAccordion = ({gqlAccordionItem}: FaqAccordionProps)=>
     <Accordion>
         <AccordionSummary
-            data-cy={`accordion-item-${gqlAccordionItem._id}`}
+            data-cy={`accordion-item-button-${gqlAccordionItem._id}`}
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
         >
             <Typography component="span">{gqlAccordionItem.name}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails data-cy={`accordion-item-details-${gqlAccordionItem._id}`}>
             {gqlAccordionItem.text}
         </AccordionDetails>
     </Accordion>
