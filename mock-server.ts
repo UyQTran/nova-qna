@@ -3,6 +3,7 @@ import {startStandaloneServer} from "@apollo/server/standalone";
 
 const typeDefs = `#graphql
   type AccordionItem {
+    _id: ID!
     name: String
     text: String
   }
@@ -10,6 +11,7 @@ const typeDefs = `#graphql
     items: [AccordionItem]
   }
   type Accordion {
+    _id: ID!
     title: String
     accordionItemsCollection: AccordionItemCollection
   }
@@ -24,10 +26,12 @@ const typeDefs = `#graphql
 
 const accordionItems = [
     {
+        _id: '123',
         name: 'Hvilke selskaper har Uy jobbet for?',
         text: 'EVRY, Dfind Consulting, Apriil og Webstep'
     },
     {
+        _id: '234',
         name: 'Hvor gammel er Uy?',
         text: 'Han er 32 år gammel'
     }
@@ -35,6 +39,7 @@ const accordionItems = [
 
 const accordions = [
     {
+        _id: '123',
         title: 'Uy sine FAQs',
         accordionItemsCollection: {items: accordionItems}
     }

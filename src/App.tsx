@@ -12,11 +12,11 @@ function App() {
 
     return (
         <>
-            {accordion.map(((gqlAccordion: GqlAccordion) => (
+            {accordion.map(((gqlAccordion: GqlAccordion, index) => (
                 <>
-                    <Typography component="h1">{gqlAccordion.title}</Typography>
-                    {gqlAccordion.accordionItemsCollection.items.map(gqlAccordionItem => (
-                        <FaqAccordion gqlAccordionItem={gqlAccordionItem}/>))}
+                    <Typography key={gqlAccordion._id} component="h1" data-cy={`accordion-${index}`}>{gqlAccordion.title}</Typography>
+                    {gqlAccordion.accordionItemsCollection.items.map((gqlAccordionItem, index) => (
+                        <FaqAccordion key={gqlAccordionItem._id} data-cy={`accordion-item-${index}`} gqlAccordionItem={gqlAccordionItem}/>))}
                 </>
             )))}
         </>
