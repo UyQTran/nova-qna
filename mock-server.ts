@@ -9,26 +9,40 @@ const typeDefs = `#graphql
   type AccordionItemCollection {
     items: [AccordionItem]
   }
+  type Accordion {
+    title: String
+    accordionItemsCollection: AccordionItemCollection
+  }
+  type AccordionCollection {
+    items: [Accordion]
+  }
 
   type Query {
-    accordionItemCollection: AccordionItemCollection
+    accordionCollection: AccordionCollection
   }
 `;
 
-const items = [
+const accordionItems = [
     {
-        name: 'Hvilke andre selskaper finnes i Nova?',
-        text: 'I tillegg til Novacare består Nova Consulting Group av Epinova, Egde, Novanet, Dekode, Northern Beat, Point Taken, Rocket, Pineberry, Infunnel, Cloud Nine, Singular Studios og Novalab!'
+        name: 'Hvilke selskaper har Uy jobbet for?',
+        text: 'EVRY, Dfind Consulting, Apriil og Webstep'
     },
     {
-        name: 'Hvor ligger Novacare sitt kontor?',
-        text: 'Nova House ligger midt på Karl Johans gate! Nærmere bestemt Karl Johans gate 16.'
+        name: 'Hvor gammel er Uy?',
+        text: 'Han er 32 år gammel'
+    }
+];
+
+const accordions = [
+    {
+        title: 'Uy sine FAQs',
+        accordionItemsCollection: {items: accordionItems}
     }
 ];
 
 const resolvers = {
     Query: {
-        accordionItemCollection: () => ({ items }),
+        accordionCollection: () => ({items: accordions}),
     },
 };
 
@@ -43,8 +57,8 @@ const server = new ApolloServer({
 //  3. prepares your app to handle incoming requests
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
+const {url} = await startStandaloneServer(server, {
+    listen: {port: 4000},
 });
 
 console.log(`🚀  Server ready at: ${url}`);

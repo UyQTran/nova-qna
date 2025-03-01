@@ -1,62 +1,35 @@
-import {useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import {ApolloClient, InMemoryCache, gql, createHttpLink} from '@apollo/client';
-import {setContext} from "@apollo/client/link/context";
-
-const link = createHttpLink({
-    uri: `${import.meta.env.VITE_BACKEND_URL}/spaces/${import.meta.env.VITE_SPACE}/environments/${import.meta.env.VITE_ENVIRONMENT}`
-});
-
-const authLink = setContext((_, { headers }) => {
-    return {
-        headers: {
-            ...headers,
-            authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`
-        }
-    }
-});
-
-const client = new ApolloClient({
-    link: authLink.concat(link),
-    cache: new InMemoryCache()
-});
+import {client} from "./client/gqlClient.ts";
+import {gqlFaqAccordion} from "./client/queries.ts";
+import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {useState} from "react";
+import {GqlAccordion} from "./client/types.ts";
 
 function App() {
-    const [count, setCount] = useState(0)
-    client.query({query: gql`
-    query {
-  accordionItemCollection {
-    items{
-      name
-      text
-    }
-  }
-}`})
+    const [accordion, setAccordion] = useState([]);
+    client.query({query: gqlFaqAccordion}).then((result) => setAccordion(result.data.accordionCollection.items))
 
     return (
         <>
-            <div>
-                <a href="https://vite.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo"/>
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo"/>
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            {accordion.map(((gqlAccordion: GqlAccordion) => (
+                <>
+                    <Typography component="h1">{gqlAccordion.title}</Typography>
+                    {gqlAccordion.accordionItemsCollection.items.map(gqlAccordionItem => (
+                        <Accordion>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1-content"
+                                id="panel1-header"
+                            >
+                                <Typography component="span">{gqlAccordionItem.name}</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                {gqlAccordionItem.text}
+                            </AccordionDetails>
+                        </Accordion>))}
+                </>
+            )))}
         </>
     )
 }
